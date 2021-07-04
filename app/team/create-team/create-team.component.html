@@ -1,0 +1,99 @@
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4 img-thumbnail" src="assets/res/logo.png" alt="" width="72"
+           height="57">
+      <h2>Checkout form</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
+        has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+
+    <div class="row  offset-2 g-2">
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Creating Team</h4>
+
+        <form class="needs-validation" [formGroup]="teamProfileForm" #teamForm (ngSubmit)="submitData()">
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" type="text" class="form-control" formControlName="name">
+              <div
+                *ngIf="teamProfileForm.controls.name.errors?.required && teamForm.submitted"
+                class="invalid-feedback">
+                Valid name is required.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName="email">
+              <div
+                *ngIf="teamProfileForm.controls.email.errors?.required && teamForm.submitted"
+                class="invalid-feedback">
+                Please enter a valid email address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" placeholder="" formControlName="phone">
+              <div
+                *ngIf="teamProfileForm.controls.phone.errors?.required && teamForm.submitted"
+                class="invalid-feedback">
+                Please enter a valid phone.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="color" class="form-label">TShirt Color</label>
+              <input type="text" class="form-control" id="color" placeholder="Enter Hex For Specific Color"
+                     formControlName="tshirt_color">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Add Your Photo Please</label>
+              <input class="form-control" type="file" id="formFile"  formControlName="photo" (change)="onFileSelected($event)">
+            </div>
+
+            <button type="button" class="btn btn-primary mt-3" (click)="addItem()">Add Rider</button>
+
+            <div
+              formArrayName="riders"
+              *ngFor="let item of riders.controls; let i = index;"
+              class="mt-3"
+            >
+              <div [formGroupName]="i" class="row">
+                <div class="col-sm-5">
+                  <label for="riderId" class="form-label">Rider Id</label>
+                  <input type="text" class="form-control" id="riderId" formControlName="rider_id">
+                </div>
+
+                <div class="col-sm-5">
+                  <label for="rider_phone" class="form-label">Rider Phone</label>
+                  <input type="text" class="form-control" id="rider_phone"
+                         formControlName="rider_phone">
+                </div>
+
+                <div class="col-sm-2">
+                  <button type="button" class="btn btn-sm btn-danger mt-4" (click)="removeItem(i)">Remove Rider</button>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4"/>
+          </div>
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit"
+                  [disabled]="!teamProfileForm.valid"
+          >Continue to checkout
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+

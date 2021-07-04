@@ -1,0 +1,34 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/res/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Riders List
+    </a>
+
+    <a routerLink="/create-team" class="btn btn-primary float-end" routerLinkActive="active">Create Team</a>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div class="table-responsive-sm">
+    <table class="table table-hover table-borderless text-center caption-top">
+      <caption>List of Riders</caption>
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">License No</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let rider of api.riders | async">
+        <th scope="row">{{rider.id}}</th>
+        <td>{{rider.full_name}}</td>
+        <td>{{rider.license_no}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
